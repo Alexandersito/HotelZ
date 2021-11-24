@@ -17,9 +17,10 @@ public class Restaurante {
     @Column(name = "foto")
     private String foto;
 
-    //    pertenece a un detalleReserva
-    @OneToMany(mappedBy = "tieneRestaurante")
-    private List<DetalleReserva> detalleReservas;
+    @ManyToOne
+    @JoinColumn(name = "tieneRestaurante", referencedColumnName = "id")
+//    @JsonBackReference
+    private DetalleReserva tieneRestaurante;
 
     public Restaurante() {
     }

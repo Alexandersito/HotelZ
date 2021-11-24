@@ -14,8 +14,10 @@ public class Testimonio {
     private String contenido;
     @Column(name = "estado")
     private int estado;
-    @OneToMany(mappedBy = "tieneTestimonio")
-    private List<Cliente> clientes;
+    @ManyToOne
+    @JoinColumn(name = "tieneTestimonio", referencedColumnName = "id")
+//    @JsonBackReference
+    private Cliente tieneTestimonio;
 
     public Testimonio() {
     }

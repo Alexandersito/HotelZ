@@ -1,6 +1,7 @@
 package pe.edu.uandina.demoSpring.modelo;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cliente")
@@ -24,13 +25,13 @@ public class Cliente {
     @Column(name = "dni")
     private String dni;
 
-    @ManyToOne
-    @JoinColumn(name = "tieneTestimonio", referencedColumnName = "id")
-    private Testimonio tieneTestimonio;
-    //referencia de muchos a uno para tieneDetalleReserva
-    @ManyToOne
-    @JoinColumn(name = "tieneDetalleReserva", referencedColumnName = "id")
-    private Testimonio tieneDetalleReserva;
+    @OneToMany(mappedBy = "tieneTestimonio")
+//    @JsonManagedReference
+    private List<Testimonio> testimonios;
+
+    @OneToMany(mappedBy = "tieneDetalleReserva")
+//    @JsonManagedReference
+    private List<DetalleReserva> detalleReservas;
 
     public Cliente() {
     }
@@ -99,19 +100,27 @@ public class Cliente {
         this.dni = dni;
     }
 
-    public Testimonio getTieneTestimonio() {
-        return tieneTestimonio;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setTieneTestimonio(Testimonio tieneTestimonio) {
-        this.tieneTestimonio = tieneTestimonio;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
-    public Testimonio getTieneDetalleReserva() {
-        return tieneDetalleReserva;
+    public List<Testimonio> getTestimonios() {
+        return testimonios;
     }
 
-    public void setTieneDetalleReserva(Testimonio tieneDetalleReserva) {
-        this.tieneDetalleReserva = tieneDetalleReserva;
+    public void setTestimonios(List<Testimonio> testimonios) {
+        this.testimonios = testimonios;
+    }
+
+    public List<DetalleReserva> getDetalleReservas() {
+        return detalleReservas;
+    }
+
+    public void setDetalleReservas(List<DetalleReserva> detalleReservas) {
+        this.detalleReservas = detalleReservas;
     }
 }
